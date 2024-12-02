@@ -16,15 +16,15 @@ import javax.persistence.Persistence;
  */
 public class SchemaGeneration {
 
-    public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AlgaworksPU");
-
-        EntityManager em = emf.createEntityManager();
-
-        List<Empresa> lista = em.createQuery("FROM Empresa", Empresa.class).getResultList();
-
-        System.out.println(lista);
-        em.close();
-        emf.close();
-    }
+//    public static void main(String[] args) {
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AlgaworksPU");
+//
+//        EntityManager em = emf.createEntityManager();
+//
+//        List<Empresa> lista = em.createQuery("FROM Empresa", Empresa.class).getResultList();
+//
+//        System.out.println(lista);
+//        em.close();
+//        emf.close();
+//    }
 }
