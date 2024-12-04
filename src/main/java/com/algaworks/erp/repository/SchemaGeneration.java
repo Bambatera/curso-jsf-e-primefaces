@@ -1,11 +1,5 @@
 package com.algaworks.erp.repository;
 
-import com.algaworks.erp.model.Empresa;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 /**
  * Classe de teste inicial.
  * <p>
