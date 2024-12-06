@@ -2,105 +2,94 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Gestão Empresas</title>
-        
+
         <h:outputStylesheet library="algaworks" name="estilo.css" />
     </h:head>
-    
+
     <h:body>
         <header>
             <h:graphicImage library="algaworks" name="logo.png" />
         </header>
-        
+
         <div id="conteudo">
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="Razão Social:" for="razaoSocial" />
+                    <p:outputLabel value="Razão Social:" for="razaoSocial" />
                     <h:panelGroup>
-                        <h:inputText id="razaoSocial" label="Razão Social" value="#{gestaoEmpresasBean.empresa.razaoSocial}" required="true" />
-                        <h:message for="razaoSocial" />
+                        <p:inputText id="razaoSocial" value="#{gestaoEmpresasBean.empresa.razaoSocial}" required="true" />
+                        <p:message for="razaoSocial" />
                     </h:panelGroup>
-                    
-                    <h:outputLabel value="Nome Fantasia:" for="nomeFantasia" />
+
+                    <p:outputLabel value="Nome Fantasia:" for="nomeFantasia" />
                     <h:panelGroup>
-                        <h:inputText id="nomeFantasia" label="Nome Fantasia" value="#{gestaoEmpresasBean.empresa.nomeFantasia}" required="true" />
-                        <h:message for="nomeFantasia" />
+                        <p:inputText id="nomeFantasia" value="#{gestaoEmpresasBean.empresa.nomeFantasia}" required="true" />
+                        <p:message for="nomeFantasia" />
                     </h:panelGroup>
-                    
-                    <h:outputLabel value="Tipo Empresa:" for="tipo" />
+
+                    <p:outputLabel value="Tipo Empresa:" for="tipo" />
                     <h:panelGroup>
-                        <h:selectOneMenu id="tipo" label="Tipo Empresa" value="#{gestaoEmpresasBean.empresa.tipo}" required="true">
+                        <h:selectOneMenu id="tipo" value="#{gestaoEmpresasBean.empresa.tipo}" required="true">
                             <f:selectItem itemLabel="Selecione..."/>
                             <f:selectItems value="#{gestaoEmpresasBean.tiposEmpresa}" var="tipoEmpresa" itemLabel="#{tipoEmpresa.descricao}" itemValue="#{tipoEmpresa}" />
                         </h:selectOneMenu>
-                        <h:message for="tipo" />
+                        <p:message for="tipo" />
                     </h:panelGroup>
-                    
-                    <h:outputLabel value="CNPJ:" for="cnpj" />
+
+                    <p:outputLabel value="CNPJ:" for="cnpj" />
                     <h:panelGroup>
-                        <h:inputText id="cnpj" label="CNPJ" value="#{gestaoEmpresasBean.empresa.cnpj}" required="true" maxlength="18">
+                        <p:inputText id="cnpj" value="#{gestaoEmpresasBean.empresa.cnpj}" required="true" maxlength="18">
                             <f:validateLength minimum="18" maximum="18" />
-                        </h:inputText>
-                        <h:message for="cnpj" />
+                        </p:inputText>
+                        <p:message for="cnpj" />
                     </h:panelGroup>
-                    
-                    <h:outputLabel value="Data Fundação:" for="dataFundacao" />
+
+                    <p:outputLabel value="Data Fundação:" for="dataFundacao" />
                     <h:panelGroup>
-                        <h:inputText id="dataFundacao" label="Data Fundação" value="#{gestaoEmpresasBean.empresa.dataFundacao}">
+                        <p:inputText id="dataFundacao" value="#{gestaoEmpresasBean.empresa.dataFundacao}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
-                        </h:inputText>
-                        <h:message for="dataFundacao" />
+                        </p:inputText>
+                        <p:message for="dataFundacao" />
                     </h:panelGroup>
-                    
-                    <h:outputLabel value="Faturamento (R$):" for="faturamento" />
+
+                    <p:outputLabel value="Faturamento (R$):" for="faturamento" />
                     <h:panelGroup>
-                        <h:inputText id="faturamento" label="Faturamento" value="#{gestaoEmpresasBean.empresa.faturamento}">
+                        <p:inputText id="faturamento" value="#{gestaoEmpresasBean.empresa.faturamento}">
                             <!-- <f:convertNumber minFractionDigits="2" maxFractionDigits="2" /> --> <!-- Define a quantidade mínima e máxima de dígitos decimais -->
                             <f:convertNumber pattern="#,##0.00" /> <!-- O pattern deve ser configurado usando o padrão americano de números, o próprio JSF irá realizar a conversão pro padrão brasileiro (caso esteja configurado) -->
                             <f:validateDoubleRange minimum="0" />
-                        </h:inputText>
-                        <h:message for="faturamento" />
+                        </p:inputText>
+                        <p:message for="faturamento" />
                     </h:panelGroup>
-                    
-                    <h:outputLabel value="" />
-                    <h:commandButton value="Salvar" actionListener="#{gestaoEmpresasBean.salvar()}"/>
-                    
-                    <h:outputLabel value="" />
-                    <h:commandLink value="Ajuda?" action="#{gestaoEmpresasBean.ajuda()}"/>
+
+                    <p:outputLabel value="" />
+                    <p:commandButton value="Salvar" actionListener="#{gestaoEmpresasBean.salvar()}" update="@form"/>
+
+                    <p:outputLabel value="" />
+                    <p:commandLink value="Ajuda?" action="#{gestaoEmpresasBean.ajuda()}"/>
                 </h:panelGrid>
-                
-                <h:dataTable value="#{[0, 0, 0, 0]}">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Razão Social" />
-                        </f:facet>
-                        
+
+                <p:dataTable value="#{[0, 0, 0, 0]}">
+                    <p:column headerText="Razão Social">
                         <h:outputText value="AlgaWorks Softwares, Treinamentos LDTA" />
-                    </h:column>
-                    
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nome Fantasia" />
-                        </f:facet>
-                        
+                    </p:column>
+
+                    <p:column headerText="Nome Fantasia">
                         <h:outputText value="AlgaWorks" />
-                    </h:column>
-                    
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Tipo Empresa" />
-                        </f:facet>
-                        
+                    </p:column>
+
+                    <p:column headerText="Tipo Empresa">
                         <h:outputText value="LTDA" />
-                    </h:column>
-                </h:dataTable>
+                    </p:column>
+                </p:dataTable>
             </h:form>
         </div>
-        
+
         <footer>
             Curso on-line "JSF e Primefaces Essencial"
         </footer>
