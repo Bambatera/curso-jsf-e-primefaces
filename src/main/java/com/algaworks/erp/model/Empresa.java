@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  * @author leand
  */
 @Entity
-@Table(name = "empresa")
+@Table(catalog = "cursojsfprimefaces", name = "empresa")
 public class Empresa implements Serializable {
 
     private static final long serialVersionUID = 1L;

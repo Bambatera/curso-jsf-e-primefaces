@@ -29,6 +29,10 @@ public class Empresas implements Serializable {
         return this.manager.find(Empresa.class, id);
     }
 
+    public List<Empresa> pesquisar() {
+        return this.manager.createQuery("FROM Empresa ORDER BY razaoSocial ASC", Empresa.class).getResultList();
+    }
+
     public List<Empresa> pesquisar(String nome) {
         TypedQuery<Empresa> query = this.manager.createQuery("FROM Empresa WHERE nomeFantasia LIKE :nomeFantasia", Empresa.class);
         query.setParameter("nomeFantasia", nome + "%");

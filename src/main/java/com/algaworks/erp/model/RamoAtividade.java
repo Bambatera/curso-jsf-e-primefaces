@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * @author leand
  */
 @Entity
-@Table(name = "ramo_atividade")
+@Table(catalog = "cursojsfprimefaces", name = "ramo_atividade")
 public class RamoAtividade implements Serializable {
 
     private static final long serialVersionUID = 1L;
