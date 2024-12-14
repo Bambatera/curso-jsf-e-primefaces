@@ -28,7 +28,7 @@ public class GestaoEmpresasBean implements Serializable {
     private List<Empresa> listaEmpresas = new ArrayList<>();
 
     public void carregarEmpresas() {
-        this.empresas.pesquisar();
+        this.listaEmpresas = this.empresas.pesquisar();
     }
     
     public List<Empresa> getListaEmpresas() {

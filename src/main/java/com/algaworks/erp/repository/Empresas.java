@@ -2,6 +2,7 @@ package com.algaworks.erp.repository;
 
 import com.algaworks.erp.model.Empresa;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -26,17 +27,36 @@ public class Empresas implements Serializable {
     }
 
     public Empresa porId(Long id) {
-        return this.manager.find(Empresa.class, id);
+        try {
+            return this.manager.find(Empresa.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     public List<Empresa> pesquisar() {
-        return this.manager.createQuery("FROM Empresa ORDER BY razaoSocial ASC", Empresa.class).getResultList();
+        List<Empresa> empresas = new ArrayList<>();
+        try {
+            empresas = this.manager.createQuery("FROM Empresa e ORDER BY e.razaoSocial ASC", Empresa.class).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return empresas;
     }
 
     public List<Empresa> pesquisar(String nome) {
-        TypedQuery<Empresa> query = this.manager.createQuery("FROM Empresa WHERE nomeFantasia LIKE :nomeFantasia", Empresa.class);
-        query.setParameter("nomeFantasia", nome + "%");
-        return query.getResultList();
+        List<Empresa> empresas = new ArrayList<>();
+        try {
+            TypedQuery<Empresa> query = this.manager.createQuery("FROM Empresa e WHERE LOWER(e.nomeFantasia) LIKE LOWER(:nomeFantasia)", Empresa.class);
+            query.setParameter("nomeFantasia", nome + "%");
+            empresas = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return empresas;
     }
 
     public Empresa guardar(Empresa empresa) {
