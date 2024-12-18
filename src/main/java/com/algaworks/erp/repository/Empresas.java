@@ -49,8 +49,8 @@ public class Empresas implements Serializable {
     public List<Empresa> pesquisar(String nome) {
         List<Empresa> empresas = new ArrayList<>();
         try {
-            TypedQuery<Empresa> query = this.manager.createQuery("FROM Empresa e WHERE LOWER(e.nomeFantasia) LIKE LOWER(:nomeFantasia)", Empresa.class);
-            query.setParameter("nomeFantasia", nome + "%");
+            TypedQuery<Empresa> query = this.manager.createQuery("FROM Empresa e WHERE LOWER(e.razaoSocial) LIKE LOWER(:razaoSocial)", Empresa.class);
+            query.setParameter("razaoSocial", "%" + nome + "%");
             empresas = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
