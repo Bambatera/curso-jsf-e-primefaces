@@ -18,7 +18,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CNPJ;
 
@@ -62,10 +61,10 @@ public class Empresa implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false, length = 30)
     private TipoEmpresa tipo;
-    
+
     @Column(name = "faturamento", precision = 10, scale = 2)
     private BigDecimal faturamento;
-    
+
     public Empresa() {
     }
 
