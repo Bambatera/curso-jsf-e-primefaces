@@ -70,15 +70,22 @@ public class GestaoEmpresasBean implements Serializable {
         this.empresa = new Empresa();
     }
 
+    public void prepararEdicao() {
+        this.ramoAtividadeConverter = new RamoAtividadeConverter(Arrays.asList(empresa.getRamoAtividade()));
+    }
+
     public void salvar() {
         this.cadastroEmpresaService.salvar(empresa);
-        if (jaHouvePesquisa()) {
-            this.pesquisar();
-        } else {
-            this.carregarEmpresas();
-        }
+        this.atualizarRegistros();
         this.messages.info("Empresa salva com sucesso!");
-        
+        RequestContext.getCurrentInstance().update(Arrays.asList("frm:empresasDataTable", "frm:messages"));
+    }
+
+    public void excluir() {
+        this.cadastroEmpresaService.excluir(empresa);
+        this.empresa = null;
+        this.atualizarRegistros();
+        this.messages.info("Empresa excluída com sucesso!");
         RequestContext.getCurrentInstance().update(Arrays.asList("frm:empresasDataTable", "frm:messages"));
     }
 
@@ -114,4 +121,15 @@ public class GestaoEmpresasBean implements Serializable {
         this.empresa = empresa;
     }
 
+    public boolean isEmpresaSelecionada() {
+        return (this.empresa != null && this.empresa.getId() != null);
+    }
+
+    private void atualizarRegistros() {
+        if (jaHouvePesquisa()) {
+            this.pesquisar();
+        } else {
+            this.carregarEmpresas();
+        }
+    }
 }
